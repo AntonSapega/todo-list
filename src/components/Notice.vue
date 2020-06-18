@@ -3,7 +3,14 @@
 
 		<form @submit.prevent>
 			<!-- <input type="button" value="Save list" class="button-save" v-show="saveBtn"> -->
-			<button type="button" class="button-save" v-show="saveBtn">Save list</button>
+			<button
+			type="button"
+			class="button-save"
+			v-show="saveBtn"
+			@click="buttonHandler"
+			>
+			Save list
+			</button>
 
 			<input
 			class="title-input"
@@ -21,6 +28,7 @@
 			<input
 			v-if="!showPlaceholder"
 			class="add-todo-input"
+			ref="addTodoInput"
 			placeholder="what needs to be done"
 			v-model="addValue"
 			@keydown.enter="addEnterHandler"
@@ -84,6 +92,10 @@ export default {
 		mainBlur() {
 			this.titlePlaceholder = 'Create title your to-do list'
 		},
+
+		buttonHandler() {
+			console.log('buttonHander')
+		}
 
 	}
 };
@@ -274,6 +286,7 @@ ul li {
 
 .button-save:active {
 	border: 2px solid #80bdff;
+	font-size: 20px;
 }
 
 </style>

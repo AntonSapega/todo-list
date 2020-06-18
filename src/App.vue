@@ -1,19 +1,18 @@
 <template>
   <div id="app">
-    <!-- <HelloWorld msg="Welcome to Your Vue.js App"/> -->
-    <Notice />
+    <router-view></router-view>
+    <!-- <Notice /> -->
   </div>
 </template>
 
 <script>
-// import HelloWorld from './components/HelloWorld.vue'
-import Notice from './components/Notice.vue'
+// import Notice from './components/Notice.vue'
 
 export default {
   name: 'App',
   components: {
     // HelloWorld,
-    Notice
+    // Notice
   }
 }
 </script>
