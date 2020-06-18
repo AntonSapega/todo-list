@@ -2,6 +2,9 @@
   <div class="notice">
 
 		<form @submit.prevent>
+			<!-- <input type="button" value="Save list" class="button-save" v-show="saveBtn"> -->
+			<button type="button" class="button-save" v-show="saveBtn">Save list</button>
+
 			<input
 			class="title-input"
 			v-if="showPlaceholder"
@@ -9,6 +12,7 @@
 			v-model="titleValue"
 			@focus="focusHandler"
 			@keydown.enter="titleEnterHandler"
+			@blur="mainBlur"
 			/>
 
 			<h1 v-if="!showPlaceholder">{{titleValue}}</h1>
@@ -25,7 +29,9 @@
 			<ul>
 				<li
 				v-for="(deal, index) in doings"
-				:key="'index' + index">
+				:key="'index' + index"
+				ref="saveBtn"
+				>
 				{{deal}}
 				</li>
 			</ul>
@@ -45,6 +51,7 @@ export default {
 
 			addValue: '',
 			doings: [],
+			saveBtn: false
 		}
 	},
 
@@ -62,9 +69,21 @@ export default {
 		},
 
 		addEnterHandler() {
-			this.doings.push(this.addValue);
-			this.addValue = null
-		}
+			if (this.addValue !== '') {
+				this.doings.push(this.addValue);
+			this.addValue = ''
+			}
+
+			if (this.doings.length > 0) {
+				this.saveBtn = true;
+			} else {
+				this.saveBtn = false;
+			}
+		},
+
+		mainBlur() {
+			this.titlePlaceholder = 'Create title your to-do list'
+		},
 
 	}
 };
@@ -148,6 +167,7 @@ select {
   align-items: center;
   height: 100vh;
   background-color:white;
+	position: relative;
 }
 
 form {
@@ -161,9 +181,9 @@ h1 {
 	margin-top: 71px;
 	color: rgb(80, 78, 78);
 	font-weight: lighter;
-	text-align: left;
-	font-size: 24px;
-	margin-left: 11px;
+	text-align: center;
+	/* font-size: 24px;
+	margin-left: 11px; */
 	margin-bottom: 0;
 }
 
@@ -216,6 +236,44 @@ h1 {
   outline-offset: -1px;
 }
 
+ul {
+	padding-inline-start: 0px;
+}
 
+ul li {
+	list-style-type: none;
+	margin-bottom: 15px;
+	background-color: rgb(224, 224, 224);
+	padding: 10px;
+}
+
+.button-save {
+	position: absolute;
+	top: 30px;
+	right: 40px;
+	width: 150px;
+	height: 40px;
+	background-color: white;
+	border: 1px solid #80bdff;
+	border-radius: 0px;
+	font-size: 20px;
+	color: rgb(80, 78, 78);
+	transition: font-size 200ms;
+}
+
+.button-save:hover {
+	font-size: 22px;
+}
+
+.button-save:focus {
+	outline-color: none;
+  outline-style: none;
+  outline-width: 0px;
+	outline-offset: 0px;
+}
+
+.button-save:active {
+	border: 2px solid #80bdff;
+}
 
 </style>
