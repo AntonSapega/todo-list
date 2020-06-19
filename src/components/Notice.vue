@@ -94,7 +94,12 @@ export default {
 		},
 
 		buttonHandler() {
-			console.log('buttonHander')
+			console.log(localStorage.getItem('doings'))
+			localStorage.setItem('doings', JSON.stringify(this.doings))
+
+			const getDoingse = localStorage.getItem('doings');
+			const doingsParse = JSON.parse(getDoingse);
+			console.log(doingsParse)
 		}
 
 	}
