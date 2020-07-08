@@ -63,12 +63,27 @@ export default {
 		}
 	},
 
+	// watch: {
+	// 	showPlaceholder(value) {
+	// 		if (!value) {
+	// 			setTimeout(() => {
+	// 				this.$refs.addTodoInput.focus()
+	// 			}, 0)
+	// 		}
+	// 	}
+	// },
+
 	methods: {
 		
 		titleEnterHandler() {
 			if (this.titleValue !== '') {
 				this.showPlaceholder = !this.showPlaceholder;
-				
+			}
+
+			if (!this.showPlaceholder) {
+				setTimeout(() => {
+					this.$refs.addTodoInput.focus()
+				}, 0)
 			}
 		},
 
